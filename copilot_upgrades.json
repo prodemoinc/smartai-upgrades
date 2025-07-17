@@ -1,0 +1,7 @@
+[
+  {
+    "title": "پخش صدای خوش‌آمدگویی",
+    "description": "با اجرای SmartAI، صدای سلام پخش می‌شود.",
+    "code": "public static void sayHelloWithVoice() throws Exception {\n    Runtime.getRuntime().exec(\"cmd /c start mshta vbscript:Execute(\\\"CreateObject('SAPI.SpVoice').Speak('سلام شایان! من فعال شدم')(window.close)\\\")\");\n}"
+  }
+]
