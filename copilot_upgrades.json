@@ -3,5 +3,50 @@
     "title": "پخش صدای خوش‌آمدگویی",
     "description": "با اجرای SmartAI، صدای سلام پخش می‌شود.",
     "code": "public static void sayHelloWithVoice() throws Exception {\n    Runtime.getRuntime().exec(\"cmd /c start mshta vbscript:Execute(\\\"CreateObject('SAPI.SpVoice').Speak('سلام شایان! من فعال شدم')(window.close)\\\")\");\n}"
+  },
+  {
+    "title": "باز کردن پوشه دلخواه",
+    "description": "پوشه‌ای مثل Downloads یا Desktop را با دستور باز می‌کند.",
+    "code": "public static void openFolder(String path) throws Exception {\n    Runtime.getRuntime().exec(\"explorer.exe \" + path);\n}"
+  },
+  {
+    "title": "باز کردن سایت دلخواه",
+    "description": "می‌تواند هر سایتی مثل Google یا YouTube را باز کند.",
+    "code": "public static void openWebsite(String url) throws Exception {\n    java.awt.Desktop.getDesktop().browse(new java.net.URI(url));\n}"
+  },
+  {
+    "title": "نوشتن متن داخل فایل",
+    "description": "متن دلخواه را داخل فایل مشخص‌شده ذخیره می‌کند.",
+    "code": "public static void writeToFile(String path, String content) throws Exception {\n    java.nio.file.Files.writeString(java.nio.file.Path.of(path), content);\n    System.out.println(\"✅ نوشته شد: \" + path);\n}"
+  },
+  {
+    "title": "ساخت فایل با فرمت دلخواه",
+    "description": "می‌تواند فایل txt یا doc یا json بسازد طبق دستور.",
+    "code": "public static void createFile(String name, String ext) throws Exception {\n    java.io.File file = new java.io.File(name + \".\" + ext);\n    if (file.createNewFile())\n        System.out.println(\"✅ ساخته شد: \" + file.getAbsolutePath());\n    else\n        System.out.println(\"⚠️ فایل از قبل وجود دارد.\");\n}"
+  },
+  {
+    "title": "اجرای برنامه با نام ساده",
+    "description": "می‌تواند برنامه‌هایی مثل Notepad یا Calculator را اجرا کند.",
+    "code": "public static void launchByName(String name) throws Exception {\n    String cmd = switch (name.toLowerCase()) {\n        case \"notepad\" -> \"notepad.exe\";\n        case \"calculator\", \"calc\" -> \"calc.exe\";\n        default -> name + \".exe\";\n    };\n    Runtime.getRuntime().exec(cmd);\n}"
+  },
+  {
+    "title": "تایمر معکوس با هشدار",
+    "description": "تایمر تنظیم‌شده را اجرا می‌کند و پس از پایان هشدار می‌دهد.",
+    "code": "public static void startCountdown(int seconds) throws Exception {\n    System.out.println(\"⏳ تایمر شروع شد: \" + seconds + \" ثانیه\");\n    Thread.sleep(seconds * 1000);\n    Runtime.getRuntime().exec(\"cmd /c start mshta vbscript:Execute(\\\"CreateObject('SAPI.SpVoice').Speak('زمان تموم شد')(window.close)\\\")\");\n}"
+  },
+  {
+    "title": "تنظیم یادآور ساعتی",
+    "description": "یادآور تنظیم‌شده در ساعت خاص پخش می‌شود.",
+    "code": "public static void setReminder(String timeHHMM, String message) throws Exception {\n    String script = \"Set oShell = CreateObject(\\\"WScript.Shell\\\")\\nDo While True\\nIf Time = \\\"\" + timeHHMM + \"\\\" Then\\noShell.Run \\\"mshta vbscript:Execute(\\\"CreateObject('SAPI.SpVoice').Speak('\" + message + \"')(window.close)\\\")\\\"\\nExit Do\\nEnd If\\nWScript.Sleep 1000\\nLoop\";\n    java.nio.file.Files.writeString(java.nio.file.Path.of(\"reminder.vbs\"), script);\n    Runtime.getRuntime().exec(\"wscript reminder.vbs\");\n}"
+  },
+  {
+    "title": "جستجوی فایل در مسیر خاص",
+    "description": "نام فایلی را در یک مسیر مشخص جستجو می‌کند.",
+    "code": "public static void searchFile(String filename, String directory) {\n    java.io.File dir = new java.io.File(directory);\n    java.io.File[] files = dir.listFiles((d, name) -> name.equalsIgnoreCase(filename));\n    if (files != null && files.length > 0)\n        System.out.println(\"📁 پیدا شد: \" + files[0].getAbsolutePath());\n    else\n        System.out.println(\"🔍 پیدا نشد.\");\n}"
+  },
+  {
+    "title": "اجرای دستور دلخواه در CMD",
+    "description": "هر دستور متنی را مستقیماً در خط فرمان اجرا می‌کند.",
+    "code": "public static void runCommand(String cmd) throws Exception {\n    Runtime.getRuntime().exec(\"cmd /c \" + cmd);\n}"
   }
 ]
